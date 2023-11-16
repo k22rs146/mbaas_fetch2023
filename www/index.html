@@ -31,16 +31,30 @@
                     $("#message").html("Failed to create new object, with error code: " + JSON.stringify(err));
                 })
         }
+
         function fetch() {
-            var TestClass = ncmb.DataStore("FetchTest");
+            let TestClass = ncmb.DataStore("FetchTest");
             TestClass.fetch()
-            .then(function(results){
-                var data=results.get("text");
-                var update=results.get("updateDate");
-                $("#message").html(data + ":" + update);
-            })
+                .then(function(results) {
+                    let data = results.get("text");
+                    let update = results.get("updateDate");
+                    $("#message").html(data + ":" + update);
+                })
         }
-        
+
+        function fetchAll() {
+            let TestClass = ncmb.DataStore("FetchTest");
+            TestClass.fetchAll()
+                .then(function(results) {
+                    let  msg = "";
+                    for (let i = 0; i < results.length; i++) {
+                        let data = results[i].get("text");
+                        let update = results[i].get("updateDate");
+                        msg += data + ":" + update;
+                    }
+                    $("#message").html(msg);
+                })
+        }
     </script>
 </head>
 
